@@ -45,6 +45,34 @@ public class MyHostedService : IHostedService, IDisposable
 
 위의 예제에서 DoWork 메서드는 주기적으로 실행될 작업을 정의합니다. Timer는 StartAsync 메서드에서 초기화되며, StopAsync 메서드에서 정리됩니다. 이렇게 구현된 IHostedService를 서비스로 등록하면 애플리케이션이 실행되는 동안 주기적으로 작업이 수행됩니다.
 
+ IHostedService를 사용하기 위해서는 Startup.cs 파일을 수정하여 해당 서비스를 등록해야 합니다. 아래는 Startup.cs 파일에서 IHostedService를 등록하는 예제입니다
+
+ 
+```C#
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+
+public class Startup
+{
+    // ...
+
+    public void ConfigureServices(IServiceCollection services)
+    {
+        // 다른 서비스 등록 코드...
+
+        // MyHostedService를 등록
+        services.AddSingleton<IHostedService, MyHostedService>();
+    }
+
+    // ...
+}
+```
+위 코드에서 MyHostedService는 IHostedService를 구현하는 클래스로 가정했습니다. services.AddSingleton<IHostedService, MyHostedService>(); 코드는 서비스 컨테이너에 MyHostedService를 등록하며, 애플리케이션이 시작될 때 MyHostedService의 StartAsync 메서드가 실행됩니다.
+
+이렇게 등록된 IHostedService는 애플리케이션의 생명주기에 맞춰서 실행되며, 주기적인 작업 등을 수행할 수 있습니다.
+
+
+
 계속 실행되어야 하는 작업을 위한 BackgroundService in .NET Core
 * https://jettstream.tistory.com/111
 
