@@ -219,7 +219,6 @@ Server-side KnownUser WEB library : KnownuserWeb.cs
 ## Step.2 Add Provider Runnable 
 
 ```cs
-using Microsoft.Extensions.Hosting;
 using System.Threading;
 using System.Threading.Tasks;
 public class KnownuserService
@@ -243,13 +242,16 @@ public class KnownuserService
 
         provider.setAPIUrl("http://demo.coat9.com/openapi");  // `Waiting Room Server` url
         provider.setAPIKey("<openapi key>");  // <openapi key> : access authentication key
-        return Task.CompletedTask;
+
+        provider.startRunnable();
+
+        return Task.FromResult(0);
     }
 
     public Task Stop()
     {
         _timer?.Change(Timeout.Infinite, 0);
-        return Task.CompleteTask;
+        return Task.FromResult(0);
     }
 
     private void DoWork()
@@ -278,8 +280,8 @@ public class Application : System.Web.HttpApplication
     protected void Application_Start()
     {
         // regist Singleton service...
-        var myService1 = new KnownuserService();
-        Application["KnownuserService"] = myService1;
+        var KnownuserService = new KnownuserService();
+        Application["KnownuserService"] = KnownuserService;
 
         // Other Application_Start code...
     }
