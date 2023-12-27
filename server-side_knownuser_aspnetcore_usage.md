@@ -329,7 +329,7 @@ public class Application : System.Web.HttpApplication
           ├─ ...                  ← add file: <waiting page>
           └─ Shared 
                ├─ ...       
-               └─ _Layout.cshtml  ← modify file: <common page>
+               └─ Site.Master     ← modify file: <common page>
 ```
 
 ### Add a <waiting page> to display to `end-user`.
