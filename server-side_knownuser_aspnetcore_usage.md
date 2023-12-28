@@ -295,7 +295,7 @@ public class Application : System.Web.HttpApplication
 
 ## Step.3 Add Verify the waiting room
 Just install `Server-side KnownUser WEB library`.
-And add async Task to `Global.asax`
+Add async Task to `Global.asax` and `KnownUserWeb.cs`
 For usage instructions, see [Using Simple Redirects](#using-simple-redirects).
 
 ```cs
