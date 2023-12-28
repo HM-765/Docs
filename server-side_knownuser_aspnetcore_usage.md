@@ -295,7 +295,7 @@ public class Application : System.Web.HttpApplication
 
 ## Step.3 Add Verify the waiting room
 Just install `Server-side KnownUser WEB library`.
-Add async Task to `Global.asax` and `KnownUserWeb.cs`
+And add async Task to `Global.asax`
 For usage instructions, see [Using Simple Redirects](#using-simple-redirects).
 
 ```cs
@@ -310,14 +310,14 @@ public class Global : System.Web.HttpApplication
         {
             var ret = (Task<bool>)ar.AsyncState;
 
-            // 비동기 작업 완료 후 실행될 로직
+            // Logic to be executed after completion of asynchronous operation
             if (ret.Result)
             {
                 // todo...
             }
         };
 
-        // 비동기 작업 시작
+        // Start an asynchronous task
         var task = KnownuserWeb.DoValidationAsync(ctx);
         task.ContinueWith(callback, task);
     }
@@ -329,11 +329,11 @@ public static class KnownuserWeb
     {
         var tcs = new TaskCompletionSource<bool>();
 
-        // 비동기 작업 수행
+        // Perform asynchronous operations
         // ...
 
-        // 작업 완료 후 결과를 TaskCompletionSource에 설정
-        tcs.SetResult(true); // 예시로 true로 설정
+        // After task completion set result to TaskCompletionSource
+        tcs.SetResult(true); // Set to true as an example
 
         return tcs.Task;
     }
