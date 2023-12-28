@@ -320,6 +320,7 @@ public class Global : System.Web.HttpApplication
         // Start an asynchronous task
         var task = KnownuserWeb.DoValidationAsync(ctx);
         task.ContinueWith(callback, task);
+        
     }
 }
 
